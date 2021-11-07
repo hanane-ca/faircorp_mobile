@@ -1,8 +1,8 @@
-package com.faircorp.services
+package com.emse.faircorpmobile.services
 
-import com.faircorp.model.RoomDto
-import com.faircorp.model.Status
-import com.faircorp.model.WindowDto
+import com.emse.faircorpmobile.model.RoomDto
+import com.emse.faircorpmobile.model.Status
+import com.emse.faircorpmobile.model.WindowDto
 
 class WindowService {
     companion object {

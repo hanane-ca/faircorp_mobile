@@ -1,4 +1,4 @@
-package com.faircorp.model
+package com.emse.faircorpmobile.model
 
 enum class Status { OPEN, CLOSED}
 

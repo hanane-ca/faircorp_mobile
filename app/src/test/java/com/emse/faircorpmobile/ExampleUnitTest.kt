@@ -1,4 +1,4 @@
-package com.faircorp
+package com.emse.faircorpmobile
 
 import org.junit.Test
 

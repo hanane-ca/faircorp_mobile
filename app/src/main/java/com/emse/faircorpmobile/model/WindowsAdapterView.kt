@@ -1,18 +1,15 @@
-package com.faircorp.model
+package com.emse.faircorpmobile.model
 
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.faircorp.OnWindowSelectedListener
-import com.faircorp.R
-import com.faircorp.WindowActivity
+import androidx.recyclerview.widget.RecyclerView
+import com.emse.faircorpmobile.R
 
-class WindowAdapter(val listener: OnWindowSelectedListener) : RecyclerView.Adapter<WindowAdapter.WindowViewHolder>() { // (1)
-
+class WindowsAdapterView : RecyclerView.Adapter<WindowsAdapterView.WindowViewHolder>() {
     inner class WindowViewHolder(view: View) : RecyclerView.ViewHolder(view) { // (2)
-        val name: TextView = view.findViewById(R.id.txt_window_name3)
+        val name: TextView = view.findViewById(R.id.txt_window_name2)
         val room: TextView = view.findViewById(R.id.txt_window_room)
         val status: TextView = view.findViewById(R.id.txt_status)
     }
@@ -33,21 +30,12 @@ class WindowAdapter(val listener: OnWindowSelectedListener) : RecyclerView.Adapt
         return WindowViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: WindowViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: WindowViewHolder, position: Int) {  // (7)
         val window = items[position]
         holder.apply {
             name.text = window.name
             status.text = window.status.toString()
             room.text = window.room.name
-            itemView.setOnClickListener { listener.onWindowSelected(window.id) } // (1)
         }
-    }
-
-    override fun onViewRecycled(holder: WindowViewHolder) { // (2)
-        super.onViewRecycled(holder)
-        holder.apply {
-            itemView.setOnClickListener(null)
-        }
-
     }
 }
