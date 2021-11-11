@@ -29,12 +29,6 @@ class WindowsActivity : BasicActivity() , OnWindowSelectedListener {
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
 
-        runCatching { ApiServices().windowsApiService.findAll().execute() } // (1)
-            .onSuccess { adapter.update(it.body() ?: emptyList()) }  // (2)
-            .onFailure {
-                Toast.makeText(this, "Error on windows loading $it", Toast.LENGTH_LONG).show()  // (3)
-            }
-
         lifecycleScope.launch(context = Dispatchers.IO) { // (1)
             runCatching { ApiServices().windowsApiService.findAll().execute() } // (2)
                 .onSuccess {
