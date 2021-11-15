@@ -1,12 +1,11 @@
 package com.emse.faircorpmobile
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.emse.faircorpmobile.services.ApiServices
-import com.emse.faircorpmobile.services.WindowApiService
-import com.emse.faircorpmobile.services.WindowService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -27,12 +26,11 @@ class WindowActivity : BasicActivity() {
                         if (window != null) {
                             findViewById<TextView>(R.id.txt_window_name).text = window.name
                             findViewById<TextView>(R.id.txt_room_name).text = window.roomName
-                            findViewById<TextView>(R.id.txt_window_current_temperature).text = "0"
-                            findViewById<TextView>(R.id.txt_window_target_temperature).text = "0"
                             findViewById<TextView>(R.id.txt_window_status).text =
                                 window.windowStatus.toString()
                         }
-                    }}
+                    }
+                }
                 .onFailure {
                     withContext(context = Dispatchers.Main) { // (3)
                         Toast.makeText(
@@ -42,6 +40,34 @@ class WindowActivity : BasicActivity() {
                         ).show()
                     }
                 }
-                }
+        }
+
+
+        val changeStatus: Button = findViewById(R.id.changeButton)
+
+        // function for the change status button
+        changeStatus.setOnClickListener {
+            lifecycleScope.launch(context = Dispatchers.IO) {
+                runCatching { ApiServices().windowsApiService.switchStatus(id).execute() }
+                    .onSuccess {
+                        withContext(context = Dispatchers.Main) {
+                            val window = it.body()
+                            if (window != null) {
+                                findViewById<TextView>(R.id.txt_window_status).text =
+                                    window.windowStatus.toString()
+                            }
+                        }
+                    }
+                    .onFailure {
+                        withContext(context = Dispatchers.Main) {
+                            Toast.makeText(
+                                applicationContext,
+                                "Error on windowStatus switching $it",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+            }
         }
     }
+}
