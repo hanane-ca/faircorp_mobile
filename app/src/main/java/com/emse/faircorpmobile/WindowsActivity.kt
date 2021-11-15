@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.emse.faircorpmobile.model.ApiServices
+import com.emse.faircorpmobile.services.ApiServices
 import com.emse.faircorpmobile.model.WindowsAdapterView
 import com.emse.faircorpmobile.services.WindowService
 import kotlinx.coroutines.Dispatchers
@@ -30,7 +30,7 @@ class WindowsActivity : BasicActivity() , OnWindowSelectedListener {
         recyclerView.adapter = adapter
 
         lifecycleScope.launch(context = Dispatchers.IO) { // (1)
-            runCatching { ApiServices().windowsApiService.findAll().execute() } // (2)
+            runCatching { ApiServices().myApiService.findAll().execute() } // (2)
                 .onSuccess {
                     withContext(context = Dispatchers.Main) { // (3)
                         adapter.update(it.body() ?: emptyList())

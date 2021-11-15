@@ -1,5 +1,6 @@
-package com.emse.faircorpmobile.model
+package com.emse.faircorpmobile.services
 
+import com.emse.faircorpmobile.model.WindowDto
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

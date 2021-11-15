@@ -13,13 +13,13 @@ class WindowService {
             RoomDto(3, "Room EF 7.10", 21.2, 20.0)
         )
 
-        // Fake lights
+        // Fake windows
         val WINDOWS: List<WindowDto> = listOf(
-            WindowDto(1, "Entry Window", ROOMS[0], Status.CLOSED),
-            WindowDto(2, "Back Window", ROOMS[0], Status.CLOSED),
-            WindowDto(3, "Sliding door", ROOMS[1], Status.OPEN),
-            WindowDto(4, "Window 1", ROOMS[2], Status.CLOSED),
-            WindowDto(5, "Window 2", ROOMS[2], Status.CLOSED),
+            WindowDto(1, "Entry Window", "Room EF 6.10", 1, Status.CLOSED),
+            WindowDto(2, "Back Window", "Room EF 6.10", 1, Status.CLOSED),
+            WindowDto(3, "Sliding door", "Hall",2, Status.OPEN),
+            WindowDto(4, "Window 1", "Room EF 7.10", 3, Status.CLOSED),
+            WindowDto(5, "Window 2", "Room EF 7.10",3, Status.CLOSED),
         )
     }
 
